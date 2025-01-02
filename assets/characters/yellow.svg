@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="b" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 457 548">
+  <defs>
+    <style>
+      .d, .e {
+        fill: #ffd056;
+      }
+
+      .d, .f {
+        stroke: #ffd056;
+        stroke-miterlimit: 10;
+        stroke-width: 40px;
+      }
+
+      .g {
+        fill: #fff;
+      }
+
+      .h {
+        fill: #2d2d2d;
+      }
+
+      .f {
+        fill: none;
+      }
+    </style>
+  </defs>
+  <g id="c" data-name="Layer 2">
+    <line class="d" x1="112" y1="411" x2="112" y2="522"/>
+    <line class="f" x1="352" y1="411" x2="352" y2="522"/>
+    <polygon class="e" points="228.5 0 0 457 457 457 228.5 0"/>
+    <circle class="g" cx="228.5" cy="313" r="91"/>
+    <circle class="h" cx="228" cy="312.5" r="48.73"/>
+    <path class="h" d="M329,488h72.2c21.96,0,39.8,17.83,39.8,39.8v20.2h-112v-60h0Z"/>
+    <path class="h" d="M24,488h112v20.2c0,21.96-17.83,39.8-39.8,39.8H24v-60h0Z" transform="translate(160 1036) rotate(-180)"/>
+  </g>
+</svg>
