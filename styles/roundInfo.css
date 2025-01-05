@@ -1,0 +1,21 @@
+.round-info-container {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+}
+.round-info-item {
+    display: flex;
+    gap: 1rem;
+}
+.round-current {
+    font-weight: bold;
+}
+.round-total {
+    font-size: 0.75rem;
+    color: rgb(var(--col-grey));
+}
+.round-info-numbers {
+    display: flex;
+    align-items: center;
+    gap: 0.2rem;
+}

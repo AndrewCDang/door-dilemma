@@ -1,0 +1,81 @@
+#doorGroup {
+    display: grid;
+    place-items: center;
+    flex: 1;
+}
+@media screen and (max-width: 600px) {
+    #doorGroup {
+        place-items: start;
+        margin-top: 1rem;
+    }
+}
+
+.doors-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr));
+    gap: 0.5rem;
+    justify-content: center;
+    width: clamp(300px, calc(80% + 2rem), 800px);
+    margin: 0 auto;
+}
+
+.door {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex: 1;
+    background-color: rgba(var(--col-white), 1);
+    box-shadow: var(--box-shadow-sm);
+    cursor: pointer;
+    padding: clamp(1rem, calc(0.5rem + 1vw), 3rem);
+    border-radius: 0.5rem;
+    transition: all 0.1s ease-in-out;
+}
+.door-reward {
+    background-color: rgba(var(--col-green), 0.8) !important;
+}
+.door-risk {
+    background-color: rgba(var(--col-red), 0.8) !important;
+}
+
+.selected-char-container {
+    margin-top: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+.selected-char-container > div svg {
+    width: clamp(1.5rem, calc(1rem + 3vw), 3rem);
+}
+
+.door:hover {
+    scale: 1.05;
+    background-color: rgba(var(--col-grey-hover), 1);
+}
+
+.percentage {
+    display: flex;
+    font-weight: bold;
+}
+
+.effect,
+.reward,
+.risk {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.reward:has(.icon-effect) .icon-cash {
+    display: none;
+}
+.reward:has(.icon-effect) .amount {
+    display: none;
+}
+
+/* Door Effects */
+.effect-greed {
+    mix-blend-mode: luminosity;
+    background-color: rgba(var(--col-grey), 0.8);
+    pointer-events: none;
+    user-select: none;
+}

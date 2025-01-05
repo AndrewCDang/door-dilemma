@@ -1,0 +1,38 @@
+.victory-screen {
+    z-index: 10;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100dvh;
+    background-color: rgb(var(--col-beige));
+    gap: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.winner-title {
+    font-size: 3rem;
+    font-weight: bold;
+}
+
+.winner-title,
+.winner-points {
+    display: flex;
+    gap: 0.5rem;
+}
+#winner-character {
+    width: clamp(18rem, calc(50vw + 2rem), 50rem);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(6rem, 1fr));
+}
+
+#winner-character > div {
+    display: flex;
+    justify-content: center;
+}
+
+#winner-character svg {
+    max-width: 10rem;
+}

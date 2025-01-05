@@ -1,0 +1,274 @@
+.group {
+    display: flex;
+    gap: clamp(1rem, calc(0.5rem + 1vw), 3rem);
+    justify-content: center;
+    width: clamp(300px, calc(80% + 2rem), 800px);
+    margin: 0 auto;
+}
+.group > div {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(0.25rem, calc(0.1rem + 1.5vw), 1rem);
+}
+.points {
+    text-align: center;
+}
+
+#characterGroup .character {
+    height: 100%;
+    width: clamp(5rem, calc(4rem + 5vw), 15rem);
+    position: relative;
+}
+
+#characterGroup .character:not(:has(svg)) {
+    display: none;
+}
+
+.char-blue,
+.char-red,
+.char-yellow,
+.char-green {
+    transition: all 0.2s ease-in-out;
+    position: relative;
+}
+
+#lives-blue,
+#lives-red,
+#lives-yellow,
+#lives-green {
+    margin: 0 auto;
+    display: flex;
+    gap: 0.5rem;
+}
+.lives {
+    height: clamp(0.5rem, calc(0.3rem + 1.5vw), 1.5rem);
+    width: clamp(0.5rem, calc(0.3rem + 1.5vw), 1.5rem);
+    border-radius: 100%;
+}
+.greyed {
+    opacity: 0.5;
+}
+.selected {
+    opacity: 1;
+}
+
+.selected .char-blue svg {
+    filter: drop-shadow(0px -8px 16px rgba(var(--col-blue), 0.8));
+}
+.selected .char-red svg {
+    filter: drop-shadow(0px -8px 16px rgba(var(--col-red), 0.3));
+}
+.selected .char-yellow svg {
+    filter: drop-shadow(0px -8px 16px rgba(var(--col-yellow), 0.3));
+}
+.selected .char-green svg {
+    filter: drop-shadow(0px -8px 16px rgba(var(--col-green), 0.3));
+}
+
+/* Character who's not turn to pick will be smaller */
+.group .character:not(.selected) .char-container {
+    scale: 0.8;
+}
+#characterGroup .character:not(:has(.lives)) {
+    mix-blend-mode: luminosity;
+}
+
+#characterGroup .selected > div::after {
+    content: "";
+    position: absolute;
+    top: -0.5rem;
+    left: 100%;
+    width: clamp(1rem, calc(1rem + 2vw), 2.5rem);
+    aspect-ratio: 3/2;
+    transform: translate(-50%, -50%) rotate(45deg);
+    background-color: rgb(var(--col-grey));
+    clip-path: polygon(0% 0%, 100% 0%, 50% 100%);
+    z-index: 1;
+}
+
+.effects-container {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -100%);
+    text-wrap: none;
+    font-size: 0.8rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    align-items: center;
+}
+.effects-container .effects {
+    display: flex;
+    gap: 0.25rem;
+    flex-direction: column;
+    align-items: center;
+}
+.effects-container .effect {
+    position: relative;
+    background-color: rgb(var(--col-pink));
+    color: rgb(var(--col-white));
+}
+
+.effects-container .effect::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    height: 110%;
+    width: 110%;
+    filter: blur(0.5rem) brightness(1.2);
+    transform: translate(-50%, -50%);
+    z-index: -1;
+    background-color: rgba(var(--col-pink), 0.5);
+    user-select: none;
+    animation-name: animation-effect-pulse;
+    animation-duration: 5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+@keyframes animation-effect-pulse {
+    0%,
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.05);
+        opacity: 0.2;
+    }
+}
+.effects-container .effect div:first-child::first-letter {
+    text-transform: uppercase;
+}
+
+.effects-container .effect .effect-label {
+    position: absolute;
+    top: 0%;
+    left: 50%;
+    transform: translate(-50%, calc(-100% - 0.25rem));
+    background-color: rgba(var(--col-black), 0.95);
+    color: rgb(var(--col-white));
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    font-size: 0.75rem;
+    min-width: 6rem;
+    width: fit-content;
+    text-align: center;
+    opacity: 0;
+    transition: all 0.2s ease-in-out;
+    user-select: none;
+    pointer-events: none;
+}
+
+.effects-container .effect:hover .effect-label {
+    opacity: 1;
+}
+.effects-container .effects > div {
+    display: flex;
+    gap: 0.25rem;
+    width: fit-content;
+    border-radius: 0.25rem;
+    padding: 0.25rem 0.5rem;
+}
+
+.effects-container .modifyPoints {
+    background-color: rgb(var(--col-green));
+    padding: 0.25rem 0.5rem;
+    display: flex;
+    width: fit-content;
+    border-radius: 0.25rem;
+}
+.effects-container .modifyPoints::before {
+    content: "x";
+}
+.effects-container .modifyPoints::after {
+    content: "$";
+    margin-left: 0.25rem;
+}
+
+.effects-container .modifyOdds {
+    background-color: rgb(var(--col-purple));
+    padding: 0.25rem 0.5rem;
+    display: flex;
+    width: fit-content;
+    border-radius: 0.25rem;
+}
+.effects-container .modifyOdds::before {
+    content: "+";
+}
+.effects-container .modifyOdds::after {
+    content: " %";
+    margin-left: 0.25rem;
+}
+
+.score-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+.round-score {
+    position: absolute;
+    top: 0%;
+    left: 50%;
+    min-height: 1.5rem;
+    width: 100%;
+    transform: translate(-50%, calc(-100% - 0.5rem));
+    opacity: 0;
+}
+
+.round-score:has(.animate-reward) {
+    opacity: 1;
+}
+.round-score:has(.animate-risk) {
+    opacity: 1;
+}
+
+.round-score-value {
+    font-weight: bold;
+    background-color: rgb(var(--col-white));
+    box-shadow: var(--box-shadow-default);
+    border-radius: 0.25rem;
+    opacity: 0;
+    text-align: center;
+}
+
+.animate-reward {
+    opacity: 1 !important;
+    animation-name: animation-reward;
+    animation-duration: 1s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: 1;
+}
+@keyframes animation-reward {
+    0%,
+    80% {
+        transform: translateY(0%);
+        background-color: rgba(var(--col-white), 1);
+    }
+    30% {
+        transform: translateY(-25%);
+        background-color: rgba(var(--col-green), 1);
+    }
+}
+
+.animate-risk {
+    opacity: 1 !important;
+    animation-name: animation-risk;
+    animation-duration: 1s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: 1;
+}
+@keyframes animation-risk {
+    0%,
+    80% {
+        transform: translateY(0%);
+        background-color: rgba(var(--col-white), 1);
+    }
+    30% {
+        transform: translateY(25%);
+        background-color: rgba(var(--col-red), 1);
+    }
+}

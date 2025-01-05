@@ -22,7 +22,7 @@
       }
     </style>
   </defs>
-  <rect class="c" width="457" height="457"/>
+  <rect class="c char-body" width="457" height="457"/>
   <circle class="b" cx="148.5" cy="167" r="91"/>
   <circle class="b" cx="319.5" cy="166.5" r="91.5"/>
   <circle class="d" cx="320" cy="166" r="49"/>

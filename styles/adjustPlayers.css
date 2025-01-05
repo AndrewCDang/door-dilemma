@@ -1,0 +1,94 @@
+.adjust-players-wrap {
+    z-index: 10;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100dvh;
+    display: grid;
+    place-items: center;
+    background-color: rgb(var(--col-beige));
+}
+.adjust-players-wrap > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    font-weight: bold;
+}
+
+.adjust-players-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+}
+.adjust-players-container > button {
+    width: 100%;
+    aspect-ratio: 1;
+    display: grid;
+    place-items: center;
+}
+.adjust-players-value {
+    color: rgb(var(--col-black));
+    box-shadow: var(--box-shadow-sm-2);
+    font-weight: bold;
+}
+.adjust-players-value:hover {
+    background-color: rgb(220, 220, 220);
+    color: rgb(var(--col-black));
+}
+.players-selected {
+    background-color: rgba(var(--col-black), 0.8) !important;
+    color: rgb(var(--col-white)) !important;
+}
+
+.plusMinusSvg {
+    width: 1rem;
+    height: 1rem;
+}
+
+.icon-users {
+    display: flex;
+    gap: 0.5rem;
+}
+.icon-users svg {
+    width: 1.5rem;
+    height: 1.5rem;
+}
+.btn-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+    text-align: center;
+}
+
+.btn-blue-icon {
+    background-color: rgb(var(--col-blue));
+    width: 1.5rem;
+    height: 1.5rem;
+}
+.btn-red-icon {
+    background-color: rgb(var(--col-red));
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+}
+.btn-yellow-icon {
+    background-color: rgb(var(--col-yellow));
+    width: 1.5rem;
+    height: 1.5rem;
+    clip-path: polygon(0% 100%, 50% 0%, 100% 100%);
+}
+
+.btn-green-icon {
+    background-color: rgb(var(--col-green));
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50% 50% 0 0;
+}
+
+.icon-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}

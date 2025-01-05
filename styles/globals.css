@@ -1,0 +1,475 @@
+@font-face {
+    font-family: "Poppins";
+    src: url("../fonts/Poppins/Poppins-Regular.ttf") format("truetype");
+    font-weight: 400; /* Regular */
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Poppins";
+    src: url("../fonts/Poppins/Poppins-Bold.ttf") format("truetype");
+    font-weight: 700; /* Bold */
+    font-style: normal;
+}
+
+body {
+    font-family: "Poppins", sans-serif;
+    background-color: rgba(var(--col-beige), 1);
+    position: relative;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box !important;
+}
+
+:root {
+    --col-red: 255, 86, 120;
+    --col-blue: 5, 203, 214;
+    --col-yellow: 255, 208, 86;
+    --col-white: 255, 255, 255;
+    --col-grey: 169, 169, 169;
+    --col-grey-hover: 245, 245, 245;
+    --col-light-grey: 210, 210, 210;
+    --col-green: 131, 230, 74;
+    --col-black: 30, 30, 30;
+    --col-blue-select: 50, 152, 253;
+    --col-purple: 207, 159, 255;
+    --col-beige: 254, 248, 233;
+    --col-pink: 255, 73, 158;
+
+    --primary-glow: conic-gradient(
+        from 180deg at 50% 50%,
+        rgb(var(--col-red)) 0deg,
+        rgb(var(--col-blue)) 55deg,
+        rgb(var(--col-yellow)) 120deg,
+        rgb(var(--col-blue)) 160deg,
+        transparent 360deg
+    );
+
+    --primary-glow-2: conic-gradient(
+        from 180deg at 50% 50%,
+        rgb(var(--col-blue)) 0deg,
+        rgb(var(--col-red)) 55deg,
+        rgb(var(--col-yellow)) 120deg,
+        rgb(var(--col-red)) 160deg,
+        transparent 360deg
+    );
+
+    --primary-glow-3: conic-gradient(
+        from 180deg at 50% 50%,
+        rgb(var(--col-red)) 0deg,
+        rgb(var(--col-yellow)) 55deg,
+        rgb(var(--col-blue)) 120deg,
+        rgb(var(--col-yellow)) 160deg,
+        transparent 360deg
+    );
+
+    --box-shadow-default: 0px 8px 16px rgba(var(--col-black), 0.3);
+    --box-shadow-sm: 0px 2px 4px rgba(var(--col-black), 0.2);
+    --box-shadow-sm-2: 2px 2px 4px rgba(var(--col-black), 0.2);
+}
+
+/* General Heading Class */
+.section-heading {
+    font-size: clamp(3rem, 1rem + 2.5vw, 4rem);
+    line-height: clamp(3rem, 1.2rem + 2.5vw, 4rem);
+}
+
+.heading {
+    font-size: clamp(1.5rem, 1rem + 2.5vw, 3rem);
+    line-height: clamp(1.8rem, 1.2rem + 2.5vw, 3.6rem);
+}
+
+/* Subheading Classes */
+.subheading-l {
+    font-size: clamp(1.3rem, 1rem + 2vw, 2.5rem);
+    line-height: clamp(1.56rem, 1.2rem + 2vw, 3rem);
+}
+
+.subheading-m {
+    font-size: clamp(1.2rem, 0.9rem + 1.75vw, 2rem);
+    line-height: clamp(1.44rem, 1.08rem + 1.75vw, 2.4rem);
+}
+
+p {
+    font-size: clamp(0.8rem, 0.7rem + 1vw, 1rem);
+    line-height: clamp(1.12rem, 0.96rem + 1vw, 1.4rem);
+}
+
+.font-bold {
+    font-weight: bold;
+}
+
+/* Text Colours */
+.text-red {
+    color: rgb(var(--col-red));
+}
+
+.text-blue {
+    color: rgb(var(--col-blue));
+}
+
+.text-yellow {
+    color: rgb(var(--col-yellow));
+}
+
+.text-white {
+    color: rgb(var(--col-white));
+}
+
+.text-grey {
+    color: rgb(var(--col-grey));
+}
+
+.text-green {
+    color: rgb(var(--col-green));
+}
+
+.text-black {
+    color: rgb(var(--col-black));
+}
+
+.text-purple {
+    color: rgb(var(--col-purple));
+}
+
+/* bg Colours */
+.bg-yellow {
+    background-color: rgb(var(--col-yellow));
+}
+
+.bg-blue {
+    background-color: rgb(var(--col-blue));
+}
+
+.bg-red {
+    background-color: rgb(var(--col-red));
+}
+
+.bg-green {
+    background-color: rgb(var(--col-green));
+}
+
+.bg-beige {
+    background-color: rgb(var(--col-beige));
+}
+
+/* Animations */
+.char-idle {
+    animation-name: animation-idle;
+    animation-duration: 0.8s;
+    animation-timing-function: ease-in-out;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+@keyframes animation-idle {
+    0%,
+    100% {
+        transform: translateY(0%);
+    }
+    50% {
+        transform: translateY(5%);
+    }
+}
+
+.char-eyes {
+    animation-name: animation-eyes;
+    animation-duration: 0.8s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+.char-body {
+    scale: 96%;
+    transform-origin: center;
+    animation-name: animation-body;
+    animation-duration: 0.8s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+@keyframes animation-eyes {
+    0% {
+        transform: translate(-1%, -1%); /* Top-left corner */
+    }
+    25% {
+        transform: translate(1%, -1%); /* Top-right corner */
+    }
+    50% {
+        transform: translate(1%, 1%); /* Bottom-right corner */
+    }
+    75% {
+        transform: translate(-1%, 1%); /* Bottom-left corner */
+    }
+    100% {
+        transform: translate(-1%, -1%); /* Back to top-left corner */
+    }
+}
+
+@keyframes animation-body {
+    0%,
+    100% {
+        transform: translateX(0%);
+    }
+    31% {
+        transform: translateX(-1%);
+    }
+    66% {
+        transform: translateX(1%);
+    }
+}
+
+.animation-rotate {
+    animation-name: animation-rotate;
+    animation-duration: 10s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+@keyframes animation-rotate {
+    0% {
+        transform: rotate(0turn);
+        opacity: 1;
+    }
+    25%,
+    75% {
+        opacity: 0.6;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        transform: rotate(1turn);
+        opacity: 1;
+    }
+}
+
+.animation-rotate-2 {
+    animation-name: animation-rotate-2;
+    animation-duration: 5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+@keyframes animation-rotate-2 {
+    0% {
+        transform: rotate(0turn);
+    }
+    100% {
+        transform: rotate(1turn);
+    }
+}
+
+.animation-pulse {
+    animation-name: animation-pulse;
+    animation-duration: 3s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+}
+
+@keyframes animation-pulse {
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.05);
+        opacity: 0.2;
+    }
+}
+
+.animation-enter {
+    animation-name: animation-enter;
+    animation-duration: 1s;
+    animation-timing-function: ease-in-out;
+}
+@keyframes animation-enter {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+/*  */
+
+.effect-gradient {
+    animation: gradientMove 5s ease-in-out infinite;
+    fill: none;
+}
+@keyframes gradientMove {
+    0%,
+    100% {
+        stroke: rgb(var(--col-red));
+    }
+    25% {
+        stroke: rgb(var(--col-blue));
+    }
+    50% {
+        stroke: rgb(var(--col-yellow));
+    }
+    75% {
+        stroke: rgb(var(--col-green));
+    }
+}
+
+#svg-gradient {
+    animation: gradientMove 5s ease-in-out infinite;
+}
+
+.stop1 {
+    animation: gradientMove 5s ease-in-out infinite;
+}
+
+.stop2 {
+    animation: gradientMove 5s ease-in-out infinite;
+}
+
+.stop3 {
+    animation: gradientMove 5s ease-in-out infinite;
+}
+
+.stop4 {
+    animation: gradientMove 5s ease-in-out infinite;
+}
+
+/* Apply the gradient animation to the stroke */
+#rainbow-gradient {
+    animation: moveGradient 5s linear infinite;
+}
+
+/* Overrides */
+ul,
+ol {
+    padding-left: 1rem;
+    margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+    margin: 0;
+}
+
+html {
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    background-color: rgba(var(--col-beige), 1);
+}
+
+body {
+    margin: 0;
+    position: relative;
+    overflow-x: clip;
+    padding: 1.5rem;
+    display: flex;
+    min-height: 100svh;
+    flex-direction: column;
+}
+
+body > main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+a {
+    text-decoration: none;
+    color: unset;
+}
+
+button {
+    all: unset;
+    font-family: inherit;
+    background-color: rgba(var(--col-black), 0.8);
+    color: rgb(var(--col-white));
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    display: flex;
+    gap: 1rem;
+}
+
+button:hover {
+    background-color: rgba(var(--col-black), 1);
+}
+.variant-2 {
+    background-color: rgba(var(--col-white), 1);
+    box-shadow: var(--box-shadow-sm);
+    color: rgb(var(--col-black));
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    display: flex;
+    gap: 1rem;
+}
+.variant-2:hover {
+    background-color: rgba(var(--col-grey-hover), 1);
+}
+
+footer {
+    margin-top: 12rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.header {
+    display: flex;
+    position: relative;
+    justify-content: center;
+}
+#toggleAdjustPlayers {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+@media screen and (max-width: 600px) {
+    .header {
+        justify-content: start;
+        align-items: center;
+        gap: 1rem;
+    }
+    #toggleAdjustPlayers {
+        position: relative;
+        top: unset;
+        left: unset;
+    }
+}
+
+/* Icons */
+.icon-cash svg {
+    stroke: rgb(var(--col-green));
+}
+
+.icon-risk {
+    stroke: rgb(var(--col-red));
+}
+
+.icon-effect {
+    stroke: rgb(var(--col-yellow));
+}
+.reward-icons {
+    display: flex;
+}
+
+.display-none {
+    display: none !important;
+}
+
+.risk .amount::before {
+    content: "-";
+}
+.reward .amount::before {
+    content: "+";
+}
