@@ -185,7 +185,7 @@ const getEffect = (playerId) => {
         modifyPoints.innerHTML = Number(prevmodify + modify).toFixed(2);
     } else if (effectType === "odds") {
         const prevAddition = playerInfo[playerId].effect.modifier.odds * 1 || 0;
-        const addition = (Math.random() * 15).toFixed(2) * 1;
+        const addition = Math.max(5, (Math.random() * 20).toFixed(2) * 1);
         playerInfo[playerId].effect.modifier.odds += addition;
         displayScore(playerId, true, `+${addition}% Odds`);
         // Update the DOM with the new addition
