@@ -211,7 +211,6 @@ const getEffect = (playerId) => {
         }
         playerInfo[playerId].effect.effect.push(chosenEffect);
         displayScore(playerId, true, `${chosenEffect.name} Effect`);
-        r;
 
         // Update the DOM with the new effects
         const effectsContainer = document.querySelector(
