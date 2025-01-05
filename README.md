@@ -1,4 +1,4 @@
-# Door Dilemma Game
+# Founders and Coders | Door Dilemma Game
 
 # Overview
 
