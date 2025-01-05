@@ -5,7 +5,7 @@
 let players = 4;
 let winner = [];
 const charArray = ["blue", "red", "yellow", "green"];
-const maxRounds = 10;
+const maxRounds = 15;
 const maxSelections = 4;
 let isLoading = false;
 let currentRound = 0;
@@ -172,7 +172,7 @@ const getEffect = (playerId) => {
     // Hanles the effect type
     if (effectType === "points") {
         const prevmodify = playerInfo[playerId].effect.modifier.points * 1 || 1;
-        const modify = (Math.random() * 0.4 + 1.1).toFixed(2) * 1;
+        const modify = Math.max(0.2, (Math.random() * 0.5).toFixed(2) * 1);
         playerInfo[playerId].effect.modifier.points = modify; // Store the modifier
 
         // Update the DOM with the new modifier
@@ -183,7 +183,7 @@ const getEffect = (playerId) => {
         modifyPoints.innerHTML = Number(prevmodify + modify).toFixed(2);
     } else if (effectType === "odds") {
         const prevAddition = playerInfo[playerId].effect.modifier.odds * 1 || 0;
-        const addition = (Math.random() * 20).toFixed(2) * 1;
+        const addition = (Math.random() * 15).toFixed(2) * 1;
         playerInfo[playerId].effect.modifier.odds += addition;
 
         // Update the DOM with the new addition
