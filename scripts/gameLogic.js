@@ -380,7 +380,7 @@ function updateDoors() {
         door.risk = Math.floor(
             easeInQuad(door.odds) * (0.6 + Math.random() * 0.5)
         );
-        door.effect = Math.floor(Math.random() * 100) < 60;
+        door.effect = Math.floor(Math.random() * 100) < 40;
     });
 
     doors.forEach((door, index) => {
