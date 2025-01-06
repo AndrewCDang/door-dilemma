@@ -15,7 +15,7 @@
     grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr));
     gap: 0.5rem;
     justify-content: center;
-    width: clamp(300px, calc(80% + 2rem), 800px);
+    width: clamp(300px, calc(80% + 3rem), 1200px);
     margin: 0 auto;
 }
 
@@ -78,4 +78,31 @@
     background-color: rgba(var(--col-grey), 0.8);
     pointer-events: none;
     user-select: none;
+}
+.effect-ejector {
+    animation: animation-ejector 0.15s ease-out;
+}
+@keyframes animation-ejector {
+    0%,
+    100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.5);
+    }
+}
+
+.effect-joker {
+    animation: animation-joker 0.15s ease-out;
+}
+@keyframes animation-joker {
+    0% {
+        transform: rotateY(0deg);
+    }
+    50% {
+        transform: rotateY(90deg);
+    }
+    100% {
+        transform: rotateY(0deg);
+    }
 }

@@ -36,7 +36,7 @@ const blameCallback = (playerId, points) => {
     randomPlayer.points -= points;
     setTimeout(() => {
         displayScore(randomPlayer.id, false, `Blamed: -${points}`);
-    }, 2000);
+    }, 300);
 };
 
 const blessCallback = (playerId, points) => {
@@ -56,6 +56,9 @@ const greedCallback = (doorId) => {
 const jokerCallBack = (doorId) => {
     const door = document.querySelector(`#door-${doorId + 1}`);
     door.classList.add("effect-joker");
+    setTimeout(() => {
+        door.classList.remove("effect-joker");
+    }, 300);
     const currentOdd = doors[doorId].odds;
     doors[doorId].odds = 100 - currentOdd;
 
@@ -71,6 +74,9 @@ const ejectorCallback = (doorId, playerId) => {
     // Adds visual effect to the door
     const door = document.querySelector(`#door-${doorId + 1}`);
     door.classList.add("effect-ejector");
+    setTimeout(() => {
+        door.classList.remove("effect-ejector");
+    }, 2000);
 
     // Get list of players who are at the selected door not including the player who triggered the effect
     const playersAtDoor = Object.keys(playerInfo)
@@ -451,10 +457,12 @@ function selectDoor(doorId) {
             (item) => item.type === "door"
         )
     ) {
-        const effect = playerInfo[currentPlayerId].effect.effect.find(
+        const effect = playerInfo[currentPlayerId].effect.effect.filter(
             (item) => item.type === "door"
         );
-        effect.callback(doorId, currentPlayerId);
+        if (effect.length > 0) {
+            effect.forEach((e) => e.callback(doorId, currentPlayerId));
+        }
         anyDoorHasEffect = true;
     }
     if (playerInfo[currentPlayerId].effect.modifier.odds > 0) {
