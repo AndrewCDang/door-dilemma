@@ -330,7 +330,7 @@ const getEffect = (playerId) => {
         // Odds Augment
     } else if (effectType.includes("odds")) {
         const prevAddition = playerInfo[playerId].effect.modifier.odds * 1 || 0;
-        const addition = Math.max(10, (Math.random() * 20).toFixed(2) * 1);
+        const addition = Math.max(10, (Math.random() * 15).toFixed(2) * 1);
         playerInfo[playerId].effect.modifier.odds += addition;
         displayScore(playerId, true, `+${addition}% Odds`);
         // Update the DOM with the new addition
@@ -548,8 +548,8 @@ function updateDoors() {
         // In last 5 rounds, doors have less chance of having an effect - to focus on battle for points
         door.effect =
             Math.floor(Math.random() * 100) *
-                (currentRound > maxRounds - 5 ? 0.5 : 1) <
-            40;
+                (currentRound > maxRounds - 5 ? 0.7 : 1) >
+            60;
         // Limits the number of doors that can be selected
         const forfeited = getForfeited();
         const remainingPlayers = players - forfeited;
