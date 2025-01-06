@@ -5,7 +5,7 @@
 let players = 4;
 let winner = [];
 const charArray = ["blue", "red", "yellow", "green"];
-const maxRounds = 15;
+const maxRounds = 5;
 const maxSelections = 4;
 let isLoading = false;
 let currentRound = 0;
@@ -164,9 +164,9 @@ const loneWolfCallback = ({ playerId, points, doorId }) => {
     }
     // Multiplies points by 5x in addition to base modifier
     const score = Math.round(
-        points * (5 + playerInfo[playerId].effect.modifier.points)
+        points * (5 + (playerInfo[playerId].effect.modifier.points || 1))
     );
-    playerInfo[playerId].points += score;
+    playerInfo[playerId].points += score || points;
     displayScore(playerId, true, `lone wolf: ${score}`);
 };
 
@@ -242,7 +242,7 @@ const getEffect = (playerId) => {
         {
             name: "ejector",
             type: "door",
-            expires: currentRound + 5,
+            expires: Math.min(maxRounds, currentRound + 6),
             description:
                 "Ejects players from the selected door and randomly places them elsewhere!",
             callback: ejectorCallback,
@@ -250,14 +250,14 @@ const getEffect = (playerId) => {
         {
             name: "greed",
             type: "door",
-            expires: currentRound + 5,
+            expires: Math.min(maxRounds, currentRound + 6),
             description: "Subsequent players cannot select your door!",
             callback: greedCallback,
         },
         {
             name: "joker",
             type: "door",
-            expires: currentRound + 5,
+            expires: Math.min(maxRounds, currentRound + 6),
             description:
                 "Reverses the odds of your door!(Modifiers added after)",
             callback: jokerCallBack,
@@ -265,7 +265,7 @@ const getEffect = (playerId) => {
         {
             name: "blame",
             type: "risk effect",
-            expires: currentRound + 7,
+            expires: Math.min(maxRounds, currentRound + 8),
             description:
                 "When you lose points, randomly assign someone else to lose the points x3 instead!",
             callback: blameCallback,
@@ -273,21 +273,21 @@ const getEffect = (playerId) => {
         {
             name: "bless",
             type: "reward door",
-            expires: currentRound + 3,
+            expires: Math.min(maxRounds, currentRound + 4),
             description: "Gain Triple points! Adds +20% to odds!",
             callback: blessCallback,
         },
         {
             name: "stinky",
             type: "door",
-            expires: currentRound + 3,
+            expires: Math.min(maxRounds, currentRound + 6),
             description: "Direct adjacent doors lose -30% odds",
             callback: stinkyCallback,
         },
         {
             name: "lone Wolf",
             type: "reward",
-            expires: currentRound + 5,
+            expires: Math.min(maxRounds, currentRound + 6),
             description:
                 "If no other players share your same door, get an additional 5x multiplier to your points!",
             callback: loneWolfCallback,
@@ -295,7 +295,7 @@ const getEffect = (playerId) => {
         {
             name: "thief",
             type: "reward",
-            expires: currentRound + 3,
+            expires: Math.min(maxRounds, currentRound + 4),
             description:
                 "Steals half of the points gained by all other players at the selected door!",
             callback: thiefCallback,
@@ -417,7 +417,7 @@ const applyEffect = (playerId, points, effectType) => {
             );
         } else {
             const modifier = player.effect.modifier.points || 1;
-            displayScore(playerId, true, Math.round(points * modifier));
+            displayScore(playerId, true, `+${Math.round(points * modifier)}`);
             player.points += Math.round(points * 1 * modifier); // Apply modifier
         }
     } else if (effectType === "risk" || effectType.includes("risk")) {
@@ -432,7 +432,7 @@ const applyEffect = (playerId, points, effectType) => {
                 playerInfo[playerId].lives - 1,
                 0
             );
-            displayScore(playerId, false, points);
+            displayScore(playerId, false, `-${points}`);
             player.points -= points;
         }
     }
@@ -549,16 +549,22 @@ function updateDoors() {
         door.risk = Math.floor(
             easeInQuad(door.odds) * (0.6 + Math.random() * 0.5)
         );
-        door.effect = Math.floor(Math.random() * 100) < 40;
+        // In last 5 rounds, doors have less chance of having an effect - to focus on battle for points
+        door.effect =
+            Math.floor(Math.random() * 100) *
+                (currentRound > maxRounds - 5 ? 0.5 : 1) <
+            40;
         // Limits the number of doors that can be selected
-        if (door.odds > 70 && players > 1) {
+        const forfeited = getForfeited();
+        const remainingPlayers = players - forfeited;
+        if (door.odds > 70 && remainingPlayers > 1) {
             const isLimited =
                 door.odds > 90
                     ? 1
                     : Math.random() + currentRound / (maxRounds * 2) > 0.6;
             const limitedNumber = Math.max(
                 1,
-                Math.ceil((Math.random() * players) / 2)
+                Math.ceil((Math.random() * remainingPlayers) / 2)
             );
             if (isLimited) {
                 door.limit = limitedNumber;
@@ -944,9 +950,14 @@ async function calculateRound() {
         updateSelected(-1);
         checkExpiredEffects();
         resetPlayerSelections();
-        displayLastDoor();
         isLoading = false;
     }, 2500);
+    setTimeout(
+        () => {
+            displayLastDoor();
+        },
+        isLastDoorDisplayed ? 0 : 2800
+    );
 }
 
 // Shows winner of game
@@ -967,6 +978,7 @@ async function showWinner() {
             winner.push(playerInfo[player]);
         }
     }
+    // Winner Character
     const winnersContainer = winner
         .map((item) => {
             return `
@@ -984,13 +996,37 @@ async function showWinner() {
     document.querySelector("#winner-character").innerHTML = winnersContainer;
     document.querySelector("#winner-points").innerHTML = winner[0].points;
 
-    const promises = winner.map((item) => {
+    // Other Characters
+    const winnerIds = winner.map((item) => item.id);
+    const otherCharacters = Object.keys(playerInfo).filter(
+        (player) => !winnerIds.includes(playerInfo[player].id)
+    );
+    const otherCharactersContainer = otherCharacters
+        .map((item) => {
+            return `
+            <div class"other-char-container">
+                <div class="char-${charArray[item]}"></div>
+                <div>${playerInfo[item].points}</div>
+            </div>
+            `;
+        })
+        .join("\n");
+    document.querySelector("#other-characters").innerHTML =
+        otherCharactersContainer;
+
+    const loadWinners = winner.map((item) => {
         return loadComponents(
             `.char-${charArray[item.id]}`,
             `./layouts/characters/${charArray[item.id]}.html`
         );
     });
-    await Promise.all(promises);
+    const loadOthers = otherCharacters.map((item) => {
+        return loadComponents(
+            `.char-${charArray[item]}`,
+            `./layouts/characters/${charArray[item]}.html`
+        );
+    });
+    await Promise.all([...loadWinners, ...loadOthers]);
 }
 // Shows lost screen
 async function showLose() {

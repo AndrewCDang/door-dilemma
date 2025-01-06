@@ -21,6 +21,7 @@
 .winner-points {
     display: flex;
     gap: 0.5rem;
+    font-weight: bold;
 }
 #winner-character {
     width: clamp(18rem, calc(50vw + 2rem), 50rem);
@@ -35,4 +36,20 @@
 
 #winner-character svg {
     max-width: 10rem;
+}
+
+#other-characters {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    width: clamp(18rem, calc(50vw + 2rem), 50rem);
+}
+#other-characters svg {
+    width: clamp(4rem, calc(3rem + 1vw), 8rem);
+}
+.other-char-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    text-align: center;
 }
