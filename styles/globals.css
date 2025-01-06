@@ -416,7 +416,21 @@ button:hover {
 .variant-2:hover {
     background-color: rgba(var(--col-grey-hover), 1);
 }
-
+.variant-3 {
+    background-color: unset;
+    box-shadow: none;
+    color: rgb(var(--col-black));
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    display: flex;
+    gap: 1rem;
+    padding: 0;
+}
+.variant-3:hover {
+    background-color: unset;
+    scale: 0.95;
+}
 footer {
     margin-top: 12rem;
     display: flex;
@@ -429,8 +443,11 @@ footer {
     position: relative;
     justify-content: center;
 }
-#toggleAdjustPlayers {
+.header-btn-containers {
     position: absolute;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
     top: 0;
     left: 0;
 }
@@ -440,7 +457,7 @@ footer {
         align-items: center;
         gap: 1rem;
     }
-    #toggleAdjustPlayers {
+    .header-btn-containers {
         position: relative;
         top: unset;
         left: unset;

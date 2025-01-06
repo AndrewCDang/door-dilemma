@@ -24,6 +24,9 @@ A fast-paced, local multiplayer game where players choose doors, risking points 
 -   **Greed**: Subsequent players cannot select your door!
 -   **Joker**: Reverses the odds of your door!
 -   **Blame**: When you lose points, randomly assign someone else to lose points instead!
--   **Bless**: Gain triple points!
+-   **Bless**: Gain triple points!-
+-   **Stinky**: Direct adjacent doors lose -30% odds
+-   **Lone Wolf**: If no other players share your same door, get an additional 5x multiplier to your points!
+-   **Thief**: Steals half of the points gained by all other players at the selected door!
 
 ---

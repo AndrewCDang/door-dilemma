@@ -1,0 +1,83 @@
+/* Centered container */
+.container {
+    position: fixed;
+    z-index: 10;
+    margin: 0;
+    top: 50%;
+    left: 50%;
+    width: calc(100vw - 2.5rem);
+    height: calc(100dvh - 2.5rem);
+    padding: 20px;
+    box-shadow: var(--box-shadow-default);
+    transform: translate(-50%, -50%);
+    background: rgb(var(--col-white));
+    border-radius: 2rem;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 2rem;
+    justify-content: space-around;
+    max-width: 1000px;
+}
+.conatiner-wrap {
+    top: 0;
+    left: 0;
+    position: fixed;
+    z-index: 10;
+    width: 100vw;
+    height: 100dvh;
+    backdrop-filter: blur(10px);
+}
+
+/* Header */
+header h1 {
+    font-size: 2rem;
+    color: rgb(var(--col-black));
+    margin-bottom: 20px;
+}
+
+/* Section Titles */
+h2 {
+    font-size: 1.5rem;
+    color: rgb(var(--col-black));
+    margin-bottom: 10px;
+}
+
+/* Section Content */
+p,
+ul {
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+ul {
+    padding-left: 20px;
+}
+
+ul li {
+    margin-bottom: 10px;
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 2rem;
+    }
+
+    header h1 {
+        font-size: 1.5rem;
+    }
+
+    h2 {
+        font-size: 1.3rem;
+    }
+}
+
+.questionSvg {
+    height: 2rem;
+    width: 2rem;
+}
+.questionSvg svg {
+    height: 100%;
+    width: 100%;
+}

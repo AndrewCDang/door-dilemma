@@ -37,6 +37,7 @@ const components = [
     loadComponents(".icon-cash", "./layouts/icons/cash.html"),
     loadComponents(".icon-risk", "./layouts/icons/risk.html"),
     loadComponents(".icon-effect", "./layouts/icons/effect.html"),
+    loadComponents("#toggleRules", "./layouts/toggleRules.html"),
 ];
 
 // Wait for all components to load before calling startGame
@@ -56,4 +57,12 @@ function openAdjustPlayersModal() {
 
 function closeAdjustPlayersModal() {
     document.querySelector("#adjustPlayers").innerHTML = "";
+}
+
+function openRulesModal() {
+    loadComponents("#rules", "./layouts/rules.html");
+}
+
+function closeRulesModal() {
+    document.querySelector("#rules").innerHTML = "";
 }
