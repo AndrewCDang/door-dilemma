@@ -5,7 +5,7 @@
 let players = 4;
 let winner = [];
 const charArray = ["blue", "red", "yellow", "green"];
-const maxRounds = 5;
+const maxRounds = 15;
 const maxSelections = 4;
 let isLoading = false;
 let currentRound = 0;
@@ -69,7 +69,6 @@ const blessCallback = ({ playerId, points, doorId }) => {
     );
     playerInfo[playerId].points += score;
     displayScore(playerId, true, `blessed: ${score}`);
-    console.log("blessCallback final");
 };
 
 const greedCallback = ({ doorId }) => {
@@ -213,7 +212,6 @@ const stinkyCallback = ({ doorId }) => {
     if (selectedDoors.length === 0) {
         return;
     }
-    console.log(selectedDoors);
     selectedDoors.forEach((door) => {
         // Applies visual effect
         const doorContainer = document.querySelector(`#door-${door * 1 + 1}`);
@@ -233,8 +231,6 @@ const stinkyCallback = ({ doorId }) => {
         );
         doorNegOdds.innerHTML = 100 - doors[door].odds;
     });
-    console.log("stinkyCallback final");
-    console.log(selectedDoors);
 };
 
 const getEffect = (playerId) => {
