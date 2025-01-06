@@ -177,9 +177,8 @@ const getEffect = (playerId) => {
 
     // Hanles the effect type
     if (effectType === "points") {
-        const prevmodify = playerInfo[playerId].effect.modifier.points * 1 || 1;
         const modify = Math.max(0.2, (Math.random() * 0.5).toFixed(2) * 1);
-        playerInfo[playerId].effect.modifier.points = modify; // Store the modifier
+        playerInfo[playerId].effect.modifier.points += modify;
 
         // Update the DOM with the new modifier
         const modifyPoints = document.querySelector(
@@ -188,7 +187,9 @@ const getEffect = (playerId) => {
         modifyPoints.classList.remove("display-none");
         displayScore(playerId, true, `+ x${modify}$`);
 
-        modifyPoints.innerHTML = Number(prevmodify + modify).toFixed(2);
+        modifyPoints.innerHTML = Number(
+            playerInfo[playerId].effect.modifier.points
+        ).toFixed(2);
     } else if (effectType === "odds") {
         const prevAddition = playerInfo[playerId].effect.modifier.odds * 1 || 0;
         const addition = Math.max(5, (Math.random() * 20).toFixed(2) * 1);
@@ -379,7 +380,7 @@ function updateDoors() {
         door.risk = Math.floor(
             easeInQuad(door.odds) * (0.6 + Math.random() * 0.5)
         );
-        door.effect = Math.floor(Math.random() * 100) < 50;
+        door.effect = Math.floor(Math.random() * 100) < 60;
     });
 
     doors.forEach((door, index) => {
